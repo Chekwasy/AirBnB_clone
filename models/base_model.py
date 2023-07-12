@@ -1,11 +1,15 @@
 #!/usr/bin/python3
-"""Python class called base_model that has the methods attributes and instances which other class will inherit from"""
+"""
+Python class called base_model that has the methods attributes
+and instances which other class will inherit from
+"""
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
-    """ The class BaseModel that defines all common attributes and methods for other classes """
+    """ The class BaseModel that defines all common attributes and methods
+    for other classes """
 
     def __init__(self, name=None, my_number=0):
         """Initialization method for instance attributes"""
@@ -26,7 +30,8 @@ class BaseModel:
     def __str__(self):
         """string representation of the instance"""
 
-        st = "[" + str(BaseModel.__name__) + "]" + "(" + self.id + ")" + str(self.__dict__)
+        st = "[" + str(BaseModel.__name__) + "]" + "(" + self.id + ")" \
+            + str(self.__dict__)
         return st
 
     def to_dict(self):
