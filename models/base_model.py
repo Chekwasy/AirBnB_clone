@@ -7,18 +7,21 @@ from datetime import datetime
 class BaseModel:
     """ The class BaseModel that defines all common attributes and methods for other classes """
 
-    id = None
-    created_at = None
-    updated_at = None
-    name = None
-    my_number = 0    
-
-    def __init__(self):
-        """Initialization method"""
-
-        BaseModel.id = str(uuid.uuid4())
-        BaseModel.created_at = datetime.now()
-        BaseModel.updated_at = datetime.now()
+    def __init__(self, name=None, my_number=0):
+        """Initialization method for instance attributes"""
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        self.name = name
+        self.my_number = my_number
+        d = {
+            "my_number": self.my_number,
+            "name": self.name,
+            "updated_at": self.updated_at,
+            "id": self.id,
+            "created_at": self.created_at
+        }
+        self.__dict__ = d
 
     def __str__(self):
         """string representation of the instance"""
@@ -26,19 +29,20 @@ class BaseModel:
         st = "[" + str(BaseModel.__name__) + "]" + "(" + self.id + ")" + str(self.__dict__)
         return st
 
-    def __dict__(self):
+    def to_dict(self):
         """ to dict"""
 
-        d = {
-            "my_number": BaseModel.my_number,
-            "name": BaseModel.name,
-            "updated_at": BaseModel.updated_at,
-            "id": BaseModel.id,
-            "created_at": BaseModel.created_at
+        dt = {
+            "my_number": self.my_number,
+            "name": self.name,
+            "updated_at": self.updated_at.isoformat(),
+            "id": self.id,
+            "created_at": self.created_at.isoformat()
         }
-        return d
+        self.to_dict = dt
+        return self.to_dict
 
-if __name__ == "__main__":
-    a = BaseModel()
-    print(a.id)
-    print(a)
+    def save(self):
+        """saving method to change the updated time"""
+
+        setattr(self, "updated_at", datetime.now())
