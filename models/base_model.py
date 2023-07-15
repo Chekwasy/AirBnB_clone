@@ -21,7 +21,7 @@ class BaseModel:
             args = ["id", "my_number", "name", "created_at", "updated_at"]
             for k, v in kwargs.items():
                 if k in args:
-                    if k is "updated_at" or k is "created_at":
+                    if k == "updated_at" or k == "created_at":
                         v = datetime.fromisoformat(v)
                     setattr(self, k, v)
         else:
@@ -52,14 +52,17 @@ class BaseModel:
         dt = {
             "my_number": self.my_number,
             "name": self.name,
+            "__class__": str(BaseModel.__name__),
             "updated_at": self.updated_at.isoformat(),
             "id": self.id,
             "created_at": self.created_at.isoformat()
         }
-        self.to_dict = dt
-        return self.to_dict
+        return dt
 
     def save(self):
         """saving method to change the updated time"""
+        from models import storage
 
         setattr(self, "updated_at", datetime.now())
+        storage.new(self)
+        storage.save()

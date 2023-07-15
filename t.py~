@@ -1,0 +1,6 @@
+#!/usr/bin/python3
+
+a = {}
+a["aaa": {"ddd"}]
+print(a)
+print(a["aaa"])

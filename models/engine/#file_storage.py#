@@ -2,7 +2,6 @@
 """This does serialization and deserialiazation"""
 import json
 import os
-from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -38,7 +37,7 @@ class FileStorage:
             with open(FileStorage.__file_path, "r", encoding="utf-8") as file1:
                 txt = file1.read()
                 json_conv = json.loads(txt)
-                for key, value in json_conv.items():
+                for key, value in obj_dict.items():
                     class_name, obj_id = key.split('.')
                     cls = eval(class_name)
                     self.__objects[key] = cls(**value)
