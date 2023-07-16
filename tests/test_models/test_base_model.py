@@ -14,7 +14,8 @@ class Test_Base(unittest.TestCase):
 
         pep = pep8.StyleGuide(quit=True)
         chk = pep.check_files(["models/base_model.py"])
-        self.assertEqual(chk.total_errors, 0, "Found code style errors (and warnings).")
+        self.assertEqual(chk.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
     def test_doctest(self):
         """doc testing"""
