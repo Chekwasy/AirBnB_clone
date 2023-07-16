@@ -4,7 +4,6 @@ import unittest
 import pep8
 import os
 from models.base_model import BaseModel
-from models.user import User
 
 
 class Test_Base(unittest.TestCase):

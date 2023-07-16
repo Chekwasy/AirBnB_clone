@@ -5,13 +5,14 @@ import sys
 from datetime import datetime
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     """Console class begins"""
 
     prompt = '(hbnb) '
-    __classes = ["BaseModel"]
+    __classes = ["BaseModel", "User"]
 
     def do_create(self, line):
         """This create new instance, saves it to json file and prints the id"""

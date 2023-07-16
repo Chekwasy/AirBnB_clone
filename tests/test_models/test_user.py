@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Base Class"""
+"""User test class"""
 import unittest
 import pep8
 import os
@@ -14,7 +14,7 @@ class Test_Base(unittest.TestCase):
         """test for pep8"""
 
         pep = pep8.StyleGuide(quit=True)
-        chk = pep.check_files(["models/base_model.py"])
+        chk = pep.check_files(["models/user.py"])
         self.assertEqual(chk.total_errors, 0,
                          "Found code style errors (and warnings).")
 
