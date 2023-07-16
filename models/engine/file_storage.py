@@ -21,7 +21,6 @@ class FileStorage:
         """this method sets in the private object obj as the
         object and the key"""
 
-        print(obj.__class__.__name__)
         stringg = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[stringg] = obj
 
