@@ -18,12 +18,18 @@ class BaseModel:
 
         kwargs_len = len(kwargs)
         if kwargs_len > 0:
-            args = ["id", "my_number", "name", "created_at", "updated_at"]
+            args = [
+                "id",
+                "my_number",
+                "name",
+                "created_at",
+                "updated_at"
+            ]
             for k, v in kwargs.items():
                 if k in args:
                     if k == "updated_at" or k == "created_at":
                         v = datetime.fromisoformat(v)
-                    if k == "name" and v == None:
+                    if k == "name" and v is None:
                         continue
                     if k == "my_number" and v == 0:
                         continue
@@ -56,9 +62,9 @@ class BaseModel:
         """ to dict"""
 
         dt = self.__dict__.copy()
-        dt ["__class__"] = str(BaseModel.__name__)
-        dt ["updated_at"] = self.updated_at.isoformat()
-        dt ["created_at"] =  self.created_at.isoformat()
+        dt["__class__"] = str(BaseModel.__name__)
+        dt["updated_at"] = self.updated_at.isoformat()
+        dt["created_at"] = self.created_at.isoformat()
         return dt
 
     def save(self):

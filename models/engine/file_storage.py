@@ -17,7 +17,8 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """this method sets in the private object obj as the object and the key"""
+        """this method sets in the private object obj as the
+        object and the key"""
 
         stringg = "{}.{}".format(type(obj).__name__, obj.id)
         self.__objects[stringg] = obj
@@ -26,7 +27,7 @@ class FileStorage:
         """serializes the object which is a dictionary"""
 
         dict_jfile = {}
-        for k,v in self.__objects.items():
+        for k, v in self.__objects.items():
             dict_jfile[k] = v.to_dict()
 
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file1:
