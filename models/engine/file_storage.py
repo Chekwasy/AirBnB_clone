@@ -3,6 +3,7 @@
 import json
 import os
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -20,7 +21,8 @@ class FileStorage:
         """this method sets in the private object obj as the
         object and the key"""
 
-        stringg = "{}.{}".format(type(obj).__name__, obj.id)
+        print(obj.__class__.__name__)
+        stringg = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[stringg] = obj
 
     def save(self):
@@ -28,7 +30,8 @@ class FileStorage:
 
         dict_jfile = {}
         for k, v in self.__objects.items():
-            dict_jfile[k] = v.to_dict()
+            dct = v.to_dict()
+            dict_jfile[k] = dct
 
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file1:
             jstr = json.dumps(dict_jfile)
