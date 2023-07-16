@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+"""This does serialization and deserialiazation"""
+import json
+
+
+class FileStorage:
+    """File storage class for storing instances of a dictionary through json"""
+
+    __file_path = "file.json"
+    __objects = {}
+
+    @property
+    def all(self):
+        """all method to return dictionary of the class attribute"""
+
+        return FileStorage.__objects
+
+    def new(self, obj):
+        """this method sets in the private object obj as the object and the key"""
+
+        FileStorage.__objects[str(type(obj))] = str(type(obj)) + "." + type(obj).id
+
+    def save(self):
+        """serializes the object which is a dictionary"""
+
+        with open(FileStorage.__file_path, w, encoding="utf-8") as file1:
+            file1.write(json.dumps(FileStorage.__objects))
+
+    def reload(self):
+        """reload method to ressurate the object intstance dictionary"""
+
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, r, encoding="utf-8") as file1:
+                FileStorage.__objects = file1.read()
+
