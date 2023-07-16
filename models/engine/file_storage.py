@@ -19,16 +19,18 @@ class FileStorage:
     def new(self, obj):
         """this method sets in the private object obj as the object and the key"""
 
-        self_f = self.__objects
         stringg = "{}.{}".format(type(obj).__name__, obj.id)
-        self_f = {stringg: obj.to_dict()}
-        self.__objects = self_f
+        self.__objects[stringg] = obj
 
     def save(self):
         """serializes the object which is a dictionary"""
 
+        dict_jfile = {}
+        for k,v in self.__objects.items():
+            dict_jfile[k] = v.to_dict()
+
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file1:
-            jstr = json.dumps(self.__objects)
+            jstr = json.dumps(dict_jfile)
             file1.write(jstr)
 
     def reload(self):
@@ -41,4 +43,5 @@ class FileStorage:
                 for key, value in json_conv.items():
                     class_name, obj_id = key.split('.')
                     cls = eval(class_name)
-                    self.__objects[key] = cls(**value)
+                    ins = cls(**value)
+                    self.__objects[key] = ins

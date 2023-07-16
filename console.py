@@ -38,18 +38,13 @@ class HBNBCommand(cmd.Cmd):
         else:
             obj = storage.all()
             stt = args[0] + "." + args[1]
+            if_true = False
             for obj_id in obj.keys():
                 if obj_id == stt:
-                    ob = obj[obj_id].copy()
-                    for k, v in ob.items():
-                        if k == "updated_at" or k == "created_at":
-                            ob[k] = datetime.fromisoformat(v)
-                    del ob["__class__"]
-                    st = "[" + args[0] + "]" + \
-                        "(" + args[1] + ")" + str(ob)
-                    print(st)
-                else:
-                    print("** no instance found **")
+                    print(obj[obj_id])
+                    if_true = True
+            if if_true is False:
+                print("** no instance found **")
 
     def do_destroy(self, line):
         """
@@ -59,6 +54,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = line.split()
         to_del = None
+        found = False
         if len(args) > 2 or len(args) == 0:
             print("** class name missing **")
         elif args[0] not in self.__classes:
@@ -70,11 +66,12 @@ class HBNBCommand(cmd.Cmd):
             stt = args[0] + "." + args[1]
             for obj_id in obj.keys():
                 if obj_id == stt:
-                    to_del = obj[obj_id]
-                else:
-                    print("** no instance found **")
+                    to_del = obj_id
+                    found = True
+            if found == False:
+                print("** no instance found **")
             if to_del is not None:
-                del to_del
+                del obj[to_del]
                 storage.save()
     def do_quit(self, arg):
         "Quit command to exit the program"
