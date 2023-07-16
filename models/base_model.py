@@ -23,20 +23,26 @@ class BaseModel:
                 if k in args:
                     if k == "updated_at" or k == "created_at":
                         v = datetime.fromisoformat(v)
+                    if k == "name" and v == None:
+                        continue
+                    if k == "my_number" and v == 0:
+                        continue
                     setattr(self, k, v)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            self.name = BaseModel.__name__
+            self.name = None
             self.my_number = 0
             d = {
-                "my_number": self.my_number,
-                "name": self.name,
                 "updated_at": self.updated_at,
                 "id": self.id,
                 "created_at": self.created_at
             }
+            if self.name is not None:
+                d["name"] = self.name
+            if self.my_number != 0:
+                d["my_number"] = self.my_number
             self.__dict__ = d
 
     def __str__(self):
@@ -49,14 +55,10 @@ class BaseModel:
     def to_dict(self):
         """ to dict"""
 
-        dt = {
-            "my_number": self.my_number,
-            "name": self.name,
-            "__class__": str(BaseModel.__name__),
-            "updated_at": self.updated_at.isoformat(),
-            "id": self.id,
-            "created_at": self.created_at.isoformat()
-        }
+        dt = self.__dict__.copy()
+        dt ["__class__"] = str(BaseModel.__name__)
+        dt ["updated_at"] = self.updated_at.isoformat()
+        dt ["created_at"] =  self.created_at.isoformat()
         return dt
 
     def save(self):
