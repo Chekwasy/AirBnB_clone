@@ -17,7 +17,7 @@ class BaseModel:
         """Initialization method for instance attributes"""
 
         kwargs_len = len(kwargs)
-        if kwargs_len > 0:
+        if kwargs_len > 0 and kwargs is not None:
             for k, v in kwargs.items():
                 if k != "__class__":
                     if k == "updated_at" or k == "created_at":

@@ -21,8 +21,9 @@ class FileStorage:
         """this method sets in the private object obj as the
         object and the key"""
 
-        stringg = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[stringg] = obj
+        if obj is not None:
+            stringg = "{}.{}".format(obj.__class__.__name__, obj.id)
+            self.__objects[stringg] = obj
 
     def save(self):
         """serializes the object which is a dictionary"""
