@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """class place that inherit from basemodel for name etc"""
 from models.base_model import BaseModel
-from models.user import User
-from models.city import City
 
 
 class Place(BaseModel):

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """class city that inherit from basemodel for city name etc"""
 from models.base_model import BaseModel
-from models.base_model import State
 
 
 class City(BaseModel):
