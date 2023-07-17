@@ -119,6 +119,8 @@ class HBNBCommand(cmd.Cmd):
         d_line = line.split(".")
         if d_line[1] == "all()":
             self.do_all(d_line[0])
+        if d_line[1] == "count()":
+            self.count(d_line[0])
 
     def do_update(self, line):
         """ Updates an instance based on the class name and id by adding
@@ -149,6 +151,21 @@ class HBNBCommand(cmd.Cmd):
                 a = args[3]
                 b = a.split("\"")
                 setattr(ins, args[2], b[1])
+    def count(self, line):
+        """Prints total instance based on class"""
+
+        found = False
+        insts = storage.all()
+        tol = 0
+        for obj_id in insts.keys():
+            arr = obj_id.split(".")
+            if arr[0] == line:
+                tol = tol + 1
+                found = True
+        if found is True:
+            print(tol)
+        if found is False:
+            print("** class doesn't exist **")
 
     def do_quit(self, arg):
         "Quit command to exit the program"
