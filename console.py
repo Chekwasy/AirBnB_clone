@@ -172,6 +172,7 @@ class HBNBCommand(cmd.Cmd):
                 a = args[3]
                 b = a.split("\"")
                 setattr(ins, args[2], b[1])
+
     def count(self, line):
         """Prints total instance based on class"""
 
