@@ -4,7 +4,7 @@ import unittest
 import pep8
 import os
 from models.base_model import BaseModel
-from models.user import State
+from models.state import State
 
 
 class Test_State(unittest.TestCase):

@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""Base Class"""
+"""Base model test test Class"""
 import unittest
 import pep8
 import os
 from models.base_model import BaseModel
+
 
 class Test_Base(unittest.TestCase):
     """Test class Begins"""
