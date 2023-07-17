@@ -21,4 +21,4 @@ class Test_State(unittest.TestCase):
     def test_doctest(self):
         """doc testing"""
 
-        self.assertTrue(len(Base.__doc__) >= 1)
+        self.assertTrue(len(State.__doc__) >= 1)

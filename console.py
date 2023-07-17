@@ -135,7 +135,13 @@ class HBNBCommand(cmd.Cmd):
             fir = d_line[1].split("(")
             if fir[0] == "update":
                 lst = fir[1].split(")")
-                self.do_update(d_line[0] + " " + lst[0])
+                al = lst[0].split(", ")
+                st = ""
+                for a in al:
+                    b = a.split("\"")
+                    st = st + str(b[1])
+                    st = st + " "
+                self.do_update(d_line[0] + " " + st)
 
     def do_update(self, line):
         """ Updates an instance based on the class name and id by adding

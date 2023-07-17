@@ -21,4 +21,4 @@ class Test_Amenity(unittest.TestCase):
     def test_doctest(self):
         """doc testing"""
 
-        self.assertTrue(len(Base.__doc__) >= 1)
+        self.assertTrue(len(Amenity.__doc__) >= 1)

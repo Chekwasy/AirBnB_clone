@@ -4,8 +4,6 @@ import unittest
 import pep8
 import os
 from models.base_model import BaseModel
-from models.user import User
-
 
 class Test_Base(unittest.TestCase):
     """Test class Begins"""
@@ -21,4 +19,4 @@ class Test_Base(unittest.TestCase):
     def test_doctest(self):
         """doc testing"""
 
-        self.assertTrue(len(Base.__doc__) >= 1)
+        self.assertTrue(len(BaseModel.__doc__) >= 1)
