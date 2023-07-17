@@ -121,6 +121,16 @@ class HBNBCommand(cmd.Cmd):
             self.do_all(d_line[0])
         if d_line[1] == "count()":
             self.count(d_line[0])
+        if d_line:
+            fir = d_line[1].split("(")
+            if fir[0] == "show":
+                lst = fir[1].split(")")
+                self.do_show(d_line[0] + " " + lst[0])
+        if d_line:
+            fir = d_line[1].split("(")
+            if fir[0] == "destroy":
+                lst = fir[1].split(")")
+                self.do_destroy(d_line[0] + " " + lst[0])
 
     def do_update(self, line):
         """ Updates an instance based on the class name and id by adding
