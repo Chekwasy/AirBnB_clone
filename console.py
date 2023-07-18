@@ -206,4 +206,13 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    hbnb = HBNBCommand()
+
+    """Check if command-line arguments are provided"""
+    if len(sys.argv) > 1:
+        """Non-interactive mode"""
+        commands = sys.argv[1:]
+        hbnb.run_commands(commands)
+    else:
+        """Interactive mode"""
+        hbnb.cmdloop()
