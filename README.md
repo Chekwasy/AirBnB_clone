@@ -19,11 +19,11 @@ You can save
 
 ## Requirements
 
-- The first line of all your files should be exactly `#!/usr/bin/python3`
+- The first line of all the files should be exactly `#!/usr/bin/python3`
 - A README.md file, at the root of the project folder, is mandatory
-- Your code should adhere to the pycodestyle style guide
-- The length of your files will be tested using the wc command
-- All your modules, classes, and functions should be properly documented
+- The code should adhere to the pycodestyle style guide
+- The length of files will be tested using the wc command
+- All modules, classes, and functions should be properly documented
 
 ## Usage
 
@@ -71,7 +71,7 @@ $ python -m unittest discover tests/
 ```
 
 ### Next Steps
-The command interpreter serves as the foundation for the AirBnB Clone project. In the upcoming steps, you will continue building upon this foundation by incorporating HTML/CSS templating, database storage, API integration, and front-end development.
+The command interpreter serves as the foundation for the AirBnB Clone project. In the upcoming steps, we will continue building upon this foundation by incorporating HTML/CSS templating, database storage, API integration, and front-end development.
 <br><br>
 
 
@@ -79,5 +79,3 @@ The command interpreter serves as the foundation for the AirBnB Clone project. I
 - [Richard Chukwuchekwa](https://github.com/Chekwasy)
 - [Caleb Nyachwaya](https://github.com/CalebNyachwaya)
 ___
-
-   
