@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
     ]
 
     def do_create(self, line):
-        """This create new instance, saves it to json file and prints the id"""
+        """This creates a new instance, saves it to JSON file, and prints the id"""
 
         try:
             if not line:
@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """ Prints the string representation of an instance\
+        """Prints the string representation of an instance\
         based on the class name and id"""
 
         args = line.split()
@@ -63,10 +63,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, line):
-        """
-        Deletes an instance based on the class name and id
-        (save the change into the JSON file).
-        """
+        """Deletes an instance based on the class name and id\
+        (saves the change into the JSON file)"""
 
         args = line.split()
         to_del = None
@@ -113,9 +111,8 @@ class HBNBCommand(cmd.Cmd):
         if found is False:
             print("** class doesn't exist **")
 
-    
     def default(self, line):
-        """Handle defaults stuff."""
+        """Handles default commands"""
 
         d_line = line.split(".")
         if len(d_line) == 2:
@@ -142,7 +139,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** Unknown command **")
         else:
             print("** Unknown command **")  
-
 
     def do_update(self, line):
         """Updates an instance based on the class name and id by adding
@@ -171,13 +167,15 @@ class HBNBCommand(cmd.Cmd):
             return
 
         instance = obj[obj_id]
+        try:
+            attribute_value = eval(attribute_value)
+        except (NameError, SyntaxError):
+            pass
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 
-
-
     def count(self, line):
-        """Prints total instance based on class"""
+        """Prints the total number of instances based on class"""
 
         found = False
         insts = storage.all()
@@ -193,7 +191,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_quit(self, arg):
-        "Quit command to exit the program"
+        """Quit command to exit the program"""
 
         return True
 
