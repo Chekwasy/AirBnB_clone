@@ -47,9 +47,9 @@ To use the Airbnb Clone command interpreter, follow the steps below:
     - `all` or `all <class_name>`: Prints all instances or instances of a specific class.
     - `update <class_name> <id> <attribute_name> <attribute_value>`: Updates an instance's attribute based on the class name, ID, attribute name, and attribute value.
 5. To execute a command, type it in the command prompt and press Enter. For example, to exit from the program you would enter:
-```bash
-(hbnb) quit
-```
+   ```bash
+   (hbnb) quit
+   ```
 
 ## Project Files
 The project consists of the following files:
