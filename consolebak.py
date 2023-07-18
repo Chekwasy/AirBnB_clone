@@ -113,68 +113,65 @@ class HBNBCommand(cmd.Cmd):
         if found is False:
             print("** class doesn't exist **")
 
-    
     def default(self, line):
         """Handle defaults stuff."""
 
         d_line = line.split(".")
-        if len(d_line) == 2:
-            if d_line[1] == "all()":
-                self.do_all(d_line[0])
-            elif d_line[1] == "count()":
-                self.count(d_line[0])
-            elif "show(" in d_line[1] and ")" in d_line[1]:
-                instance_id = d_line[1].split("(")[1].split(")")[0]
-                self.do_show(f"{d_line[0]} {instance_id}")
-            elif "destroy(" in d_line[1] and ")" in d_line[1]:
-                instance_id = d_line[1].split("(")[1].split(")")[0]
-                self.do_destroy(f"{d_line[0]} {instance_id}")
-            elif "update(" in d_line[1] and ")" in d_line[1]:
-                update_args = d_line[1].split("(")[1].split(")")[0].split(", ")
-                if len(update_args) == 3:
-                    instance_id = update_args[0].strip('\"')
-                    attribute_name = update_args[1].strip('\"')
-                    attribute_value = update_args[2].strip('\"')
-                    self.do_update(f"{d_line[0]} {instance_id} {attribute_name} {attribute_value}")
-                else:
-                    print("** Invalid syntax for update command **")
-            else:
-                print("** Unknown command **")
-        else:
-            print("** Unknown command **")  
-
+        if d_line[1] == "all()":
+            self.do_all(d_line[0])
+        if d_line[1] == "count()":
+            self.count(d_line[0])
+        if d_line:
+            fir = d_line[1].split("(")
+            if fir[0] == "show":
+                lst = fir[1].split(")")
+                self.do_show(d_line[0] + " " + lst[0])
+        if d_line:
+            fir = d_line[1].split("(")
+            if fir[0] == "destroy":
+                lst = fir[1].split(")")
+                self.do_destroy(d_line[0] + " " + lst[0])
+        if d_line:
+            fir = d_line[1].split("(")
+            if fir[0] == "update":
+                lst = fir[1].split(")")
+                al = lst[0].split(", ")
+                st = ""
+                for a in al:
+                    b = a.split("\"")
+                    st = st + str(b[1])
+                    st = st + " "
+                self.do_update(d_line[0] + " " + st)
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by adding
-        or updating attributes (saves the change into the JSON file)"""
+        """ Updates an instance based on the class name and id by adding
+        or updating attribute (save the change into the JSON file)"""
 
         args = line.split()
         found = False
-        if len(args) < 4:
-            print("** Invalid syntax: <class name>.update(<id>, <attribute name>, <attribute value>) **")
-            return
-
-        class_name = args[0]
-        instance_id = args[1]
-        attribute_name = args[2]
-        attribute_value = args[3]
-
-        if class_name not in self.__classes:
-            print("** Class doesn't exist **")
-            return
-
-        obj = storage.all()
-        obj_id = f"{class_name}.{instance_id}"
-
-        if obj_id not in obj:
-            print("** No instance found **")
-            return
-
-        instance = obj[obj_id]
-        setattr(instance, attribute_name, attribute_value)
-        instance.save()
-
-
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.__classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        else:
+            obj = storage.all()
+            for obj_id in obj.keys():
+                arr = obj_id.split(".")
+                if arr[1] == args[1]:
+                    ins = obj[obj_id]
+                    found = True
+            if found is False:
+                print("** no instance found **")
+            if len(args) == 2:
+                print("** attribute name missing **")
+            if len(args) == 3:
+                print("** value missing **")
+            if len(args) == 4 and found is True:
+                a = args[3]
+                b = a.split("\"")
+                setattr(ins, args[2], b[1])
 
     def count(self, line):
         """Prints total instance based on class"""
