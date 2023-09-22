@@ -39,11 +39,17 @@ class BaseModel:
     def to_dict(self):
         """ to dict"""
 
-        dt = self.__dict__.copy()
-        dt["__class__"] = self.__class__.__name__
-        dt["updated_at"] = self.updated_at.isoformat()
-        dt["created_at"] = self.created_at.isoformat()
-        return dt
+        custom = self.__dict__.copy()
+        custom_dict = {}
+        custom_dict.update({"__class__": self.__class__.__name__})
+        for key in list(custom):
+            if key in ("created_at", "updated_at"):
+                custom_dict.update({key: getattr(self, key).isoformat()})
+            elif key == "_sa_instance_state":
+                custom.pop(key)
+            else:
+                custom_dict.update({key: getattr(self, key)})
+        return custom_dict
 
     def save(self):
         """saving method to change the updated time"""
