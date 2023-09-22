@@ -32,7 +32,7 @@ class BaseModel:
         """string representation of the instance"""
 
         st = "[" + str(self.__class__.__name__) + "]" + \
-            "(" + self.id + ")" + str(self.__dict__)
+            " (" + self.id + ") " + str(self.__dict__)
         return st
 
     def to_dict(self):
