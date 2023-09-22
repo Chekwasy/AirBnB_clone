@@ -54,6 +54,7 @@ class BaseModel:
     def save(self):
         """saving method to change the updated time"""
 
-        self.updated_at = datetime.now()
-        models.storage.new(self)
-        models.storage.save()
+        if (self.updated_at):
+            self.updated_at = datetime.now()
+            models.storage.new(self)
+            models.storage.save()
