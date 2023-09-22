@@ -5,6 +5,7 @@ and instances which other class will inherit from
 """
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
