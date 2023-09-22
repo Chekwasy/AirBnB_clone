@@ -48,6 +48,6 @@ class BaseModel:
         """saving method to change the updated time"""
         from models import storage
 
-        setattr(self, "updated_at", datetime.now())
+        self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
